@@ -36,18 +36,28 @@ const CODE_SNIPPETS = {
 } as const;
 
 const TECH_ROW = [
-  "Flutter",
-  "Dart",
-  "TypeScript",
-  "Kotlin",
-  "Swift",
-  "Firebase",
-  "Docker",
-  "CI/CD",
-  "REST / GraphQL",
-  "Clean Architecture",
-  "IoT",
-  "ML / Vision",
+  {name: "Flutter", logo: "/logos/flutter.webp"},
+  {name: "Dart", logo: "/logos/dart.webp"},
+  {name: "Angular", logo: "/logos/angular.webp"},
+  {name: "TypeScript", logo: "/logos/typescript.webp"},
+  {name: "Kotlin", logo: "/logos/kotlin.png"},
+  {name: "Firebase", logo: "/logos/firebase_logo.webp"},
+  {name: "Git", logo: "/logos/git.webp"},
+  {name: "IoT", logo: "/logos/iot2.jpg"},
+
+];
+
+const SIDE_ROW = [
+  {name: "Proxmox", logo: "/logos/proxmox.svg"},    
+  {name: "LXC", logo: "/logos/lxc.svg"},
+  {name: "VM", logo: "/logos/vm.jpg"},
+  {name: "Nginx", logo: "/logos/nginx.svg"},
+  {name: "Adguard", logo: "/logos/adguard.svg"},
+  {name: "Home Assistant", logo: "/logos/home-assistant.svg"},
+  {name: "ZeroTier", logo: "/logos/zerotier.svg"},
+  {name: "Glance", logo: "/logos/glance.webp"},
+  {name: "Immich", logo: "/logos/immich.svg"},
+  {name: "NextCloud", logo: "/logos/nextcloud.svg"},
 ];
 
 const NAV_ITEMS = ["#expertise", "#parcours", "#projets", "#contact"] as const;
@@ -71,7 +81,8 @@ const CONTENT = {
     expertiseDescription:
       "Un profil orienté résultats : du cadrage technique à la mise en prod, avec une communication claire vers les parties prenantes métier.",
     expertiseBulletTitle: "Axes forts",
-    techTitle: "Stack & outillage",
+    techTitle: "Tech Stack",
+    sideTitle: "Projects personnels",
     journeyKicker: "Parcours",
     journeyTitle: "Expérience récente",
     projectsKicker: "Sélection",
@@ -101,7 +112,8 @@ const CONTENT = {
     expertiseDescription:
       "A results-driven profile from technical framing to production, with clear communication for business stakeholders.",
     expertiseBulletTitle: "Strategic focus",
-    techTitle: "Stack & tooling",
+    techTitle: "Tech Stack",
+    sideTitle: "Side projects",
     journeyKicker: "Journey",
     journeyTitle: "Recent experience",
     projectsKicker: "Selection",
@@ -462,7 +474,7 @@ export default function Home() {
                   title={company.name}
                   aria-label={company.name}
                 >
-                  <span className="inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border border-zinc-200 bg-white shadow-[0_1px_6px_rgba(15,23,42,0.12)] sm:h-15 sm:w-15">
+                  <span className="inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border border-zinc-200 bg-white shadow-[0_1px_6px_rgba(15,23,42,0.12)] sm:h-10 sm:w-10">
                     {company.logo ? (
                       <img
                         src={company.logo}
@@ -526,10 +538,29 @@ export default function Home() {
             {t.techTitle}
           </p>
           <div className="marquee-fade relative overflow-hidden">
-            <div className="flex w-max animate-marquee gap-10 pr-10 font-mono text-sm text-zinc-600">
+            <div className="flex w-max animate-marquee gap-5 pr-5 font-mono text-sm text-zinc-600">
               {[...TECH_ROW, ...TECH_ROW].map((tech, i) => (
-                <span key={i} className="shrink-0">
-                  {tech}
+                <span key={i} className="shrink-0 flex items-center gap-2">
+                  <img src={tech.logo} alt={tech.name} className="h-4 w-4" />
+                  {tech.name}
+                  <span className="ml-10 text-zinc-400">·</span>
+                </span>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Side MARQUEE */}
+        <section className="border-y border-zinc-200/90 bg-zinc-50 py-6">
+          <p className="mb-3 text-center text-xs font-medium uppercase tracking-widest text-zinc-600">
+            {t.sideTitle}
+          </p>
+          <div className="marquee-fade relative overflow-hidden">
+            <div className="flex w-max animate-marquee gap-5 pr-5 font-mono text-sm text-zinc-600">
+              {[...SIDE_ROW, ...SIDE_ROW].map((tech, i) => (
+                <span key={i} className="shrink-0 flex items-center gap-2">
+                  <img src={tech.logo} alt={tech.name} className="h-4 w-4" />
+                  {tech.name}
                   <span className="ml-10 text-zinc-400">·</span>
                 </span>
               ))}
